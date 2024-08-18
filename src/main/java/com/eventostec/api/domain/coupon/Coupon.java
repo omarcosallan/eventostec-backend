@@ -1,6 +1,7 @@
 package com.eventostec.api.domain.coupon;
 
 import com.eventostec.api.domain.event.Event;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,10 +22,13 @@ public class Coupon {
     @Id
     @GeneratedValue
     private UUID id;
-    private Integer discout;
+
+    private String code;
+    private Integer discount;
     private Date valid;
 
     @ManyToOne
     @JoinColumn(name = "event_id")
+    @JsonIgnore
     private Event event;
 }

@@ -1,5 +1,6 @@
 package com.eventostec.api.domain.event;
 
+import com.eventostec.api.domain.address.Address;
 import com.eventostec.api.domain.coupon.Coupon;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,20 +23,14 @@ public class Event {
     @Id
     @GeneratedValue
     private UUID id;
+
     private String title;
     private String description;
     private String imgUrl;
     private String eventUrl;
     private Boolean remote;
     private Date date;
-    @OneToMany(mappedBy = "event")
-    private Collection<Coupon> coupon;
 
-    public Collection<Coupon> getCoupon() {
-        return coupon;
-    }
-
-    public void setCoupon(Collection<Coupon> coupon) {
-        this.coupon = coupon;
-    }
+    @OneToOne(mappedBy = "event", cascade = CascadeType.ALL)
+    private Address address;
 }
